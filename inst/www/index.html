@@ -45,7 +45,9 @@ $(document).ready(function(){
 	
 		//FUNCTION CALLS TO SIGNIFICANT VARIABLE LIST & GRAPHS PLOTS
 	  //plot_graph();
-      	  add_var_list();
+      	  
+		  //add_var_list();
+		  
     }).fail(function(){
       alert("Server error: " + req.responseText);
     });        
@@ -108,21 +110,7 @@ $(document).ready(function(){
 				$("#submitbutton").removeAttr("disabled")
 				});
 				alert("plotted");
-		
-			// var req = ocpu.call("top_var_graph", {
-			//	"target.var.name" : dvname;
-			//}, 
-			//function(session){
-			//	session.getObject(function(data){
-			//	//$("#output code").text(data);	
-			//	alert("trying to plot" );
-			//	$("#plotdiv").rplot(req);
-            //
-			//	}).fail(function(){
-			//		alert("R returned an error in graph: " + req.responseText);
-			//		});
-			//	});
-				
+			
 			}
 			//SIGNIFICANT GRAPH CALL ENDS
 		
@@ -153,8 +141,8 @@ $(document).ready(function(){
 	
 	alert("exited upload");
 	
-		n=1000;
-		dist="normal";
+		var nfield =1000;
+		var distfield="normal";
         //create the plot area on the plotdiv element
         var req = $("#plotdiv").rplot("randomplot", {
           n : nfield,
