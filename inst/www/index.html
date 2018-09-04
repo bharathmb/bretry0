@@ -44,7 +44,7 @@ $(document).ready(function(){
         $("#output code").text(output);	
 	
 		//FUNCTION CALLS TO SIGNIFICANT VARIABLE LIST & GRAPHS PLOTS
-	  plot_graph();
+	  //plot_graph();
       	  add_var_list();
     }).fail(function(){
       alert("Server error: " + req.responseText);
@@ -134,27 +134,49 @@ $(document).ready(function(){
     //arguments
     //read the value for 'filename'
 	var filename = $("#uploadFile").val();
-	dvname=$("#dvname").val()
+	var dvname=$("#dvname").val()
     
     if(!filename){
       alert("No file selected.");
       return;
     }
 	
-	
-	
 	if(!dvname){
       alert("Please provide DV name.");
       return;
     }
+	
+	//disable the button to prevent multiple clicks
+     $("#submitbutton").attr("disabled", "disabled");
   
 	uploadcsv(filename); 
-  });
+	
+	alert("exited upload");
+	
+		n=1000;
+		dist="normal";
+        //create the plot area on the plotdiv element
+        var req = $("#plotdiv").rplot("randomplot", {
+          n : nfield,
+          dist : distfield
+        })
 
+        //if R returns an error, alert the error message
+        req.fail(function(){
+          alert("Server error: " + req.responseText);
+        });
+        
+        //after request complete, re-enable the button 
+        req.always(function(){
+          $("#submitbutton").removeAttr("disabled")
+        });
+      });
+    });
 
-  });
   
   </script>
+	
+	
 	
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
